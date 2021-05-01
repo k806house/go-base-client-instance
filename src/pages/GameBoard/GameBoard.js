@@ -26,8 +26,6 @@ import {
   HEATMAP_ZONE_QUARTER,
 } from "./components/Help/types";
 
-import { Card } from 'antd';
-
 const Wrapper = styled.div`
   max-width: 1377px;
   margin: 0 auto;
@@ -335,11 +333,6 @@ const GameBoard = ({ history }) => {
           />
         )}
       </Flex>
-      <Card style={{ width: 300 }}>
-        <p>Card content</p>
-        <p>Card content</p>
-        <p>Card content</p>
-      </Card>
     </Wrapper>
   );
 };

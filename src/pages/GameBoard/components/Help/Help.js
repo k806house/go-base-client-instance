@@ -4,6 +4,7 @@ import Players from "../GameInfo/components/Players/Players";
 import {
   HEATMAP_FULL,
   HEATMAP_ZONE_QUARTER,
+    hints
 } from "./types";
 
 const Wrapper = styled.div`
@@ -43,7 +44,6 @@ const Help = ({
     scores,
     times
   }) => {
-    //console.log(handleHelp);
   return (
     <Wrapper>
       <Players
@@ -58,12 +58,12 @@ const Help = ({
       />
       <HelpWrapper>
         <HelpItem
-          active={activeHelpId === 1}
+          active={activeHelpId === hints[0]['id']}
           onClick={() =>
-            scores && handleHelp({ type: "single", id: 1, count: 1 })
+            scores && handleHelp(hints[0]['handleHelp'])
           }
         >
-          Лучший ход
+            {hints[0]['name']}
         </HelpItem>
         <HelpItem
           active={activeHelpId === HEATMAP_FULL}

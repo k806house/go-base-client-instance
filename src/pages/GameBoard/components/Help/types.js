@@ -35,7 +35,9 @@ export const MAP_HALF = {
 
 export const hints = [
   { 'id': 1,
-    'handleHelp':{ type: "single", id: 1, count: 1 }},
+    'handleHelp':{ type: "single", id: 1, count: 1 },
+    'name': 'Лучший ход-----',
+    'fine': 3},
   { 'id': 16,
     'handleHelp':{ type: "multiple", multipleHandleCount: 4, id: 16 }},
   { 'id': 13,

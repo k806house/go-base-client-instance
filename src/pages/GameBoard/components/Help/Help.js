@@ -113,10 +113,11 @@ const Help = ({
               return <HelpItem
                   active={activeHelpId === item['id']}
                   onClick={() =>
-                      scores && handleHelp(item['handleHelp'])
-                  {
-                      scores && handleHelp(item['handleHelp']);
-                      if (hintCounter.lastHintStep + 1 === stepMain || stepMain === 1){
+                  {scores && handleHelp(item['handleHelp']);
+                  console.log(hintCounter.counter+ " counter");
+                  console.log(hintCounter.lastHintStep+ " last");
+                  console.log(stepMain+ " main");
+                      if (hintCounter.lastHintStep + 1 === stepMain|| hintCounter.lastHintStep === stepMain || stepMain === 0){
                           setHintCounter({counter:hintCounter.counter + 1, lastHintStep: stepMain});
                       } else {
                           setHintCounter({counter:0, lastHintStep: -1});
@@ -130,37 +131,6 @@ const Help = ({
                   </div>
               </HelpItem>
           })}
-        {/*<HelpItem*/}
-        {/*  active={activeHelpId === HEATMAP_FULL}*/}
-        {/*  onClick={() =>*/}
-        {/*    scores && handleHelp({ type: "map", id: HEATMAP_FULL })*/}
-        {/*  }*/}
-        {/*>*/}
-        {/*  Тепловая карта всей доски. Детализированная*/}
-        {/*</HelpItem>*/}
-        {/*<HelpItem*/}
-        {/*  active={activeHelpId === 16}*/}
-        {/*  onClick={() =>*/}
-        {/*    scores &&*/}
-        {/*    handleHelp({ type: "multiple", multipleHandleCount: 4, id: 16 })*/}
-        {/*  }*/}
-        {/*>*/}
-        {/*  Показать лучший из заданных 3 ходов*/}
-        {/*</HelpItem>*/}
-        {/*<HelpItem*/}
-        {/*  active={activeHelpId === HEATMAP_ZONE_QUARTER}*/}
-        {/*  onClick={() =>*/}
-        {/*    scores && handleHelp({ type: "map", id: HEATMAP_ZONE_QUARTER })*/}
-        {/*  }*/}
-        {/*>*/}
-        {/*  В какой четверти доски сейчас лучший ход?*/}
-        {/*</HelpItem>*/}
-        {/*<HelpItem*/}
-        {/*  active={activeHelpId === 34}*/}
-        {/*  onClick={() => scores && handleHelp({ type: "score", id: 34 })}*/}
-        {/*>*/}
-        {/*  Кто побеждает на данный момент?*/}
-        {/*</HelpItem>*/}
       </HelpWrapper>
     </Wrapper>
   );

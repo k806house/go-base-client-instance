@@ -59,7 +59,7 @@ const HelpItem = styled.div`
 
     &:hover {
       transform: scale(1.03);
-      background: rgba(0,0,0,.13);
+     // background: rgba(0,0,0,.13);
       box-shadow: 0 2px 20px rgba(0,0,0,.15);
     }
 

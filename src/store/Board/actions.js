@@ -11,13 +11,39 @@ import {
   GET_HINT_HEATMAP_ZONE,
   SET_BLOCKED,
   MAP_STONES,
-  GET_SCORES_WINNER
+  GET_SCORES_WINNER,
+  GET_HINT_HEATMAP_QUARTER,
+  GET_HINT_HEATMAP_2_QUARTERS,
+  SCORES_SUPERIORITY
 } from "./types";
 
 export const hintHeatmapFull = (game_id) => ({
   type: GET_HINT_HEATMAP_FULL,
   payload: {game_id: game_id}
 });
+
+export const hintHeatmapQuarter = (game_id, quarter) => ({
+  type: GET_HINT_HEATMAP_QUARTER,
+  payload: {
+    game_id,
+    quarter
+  }
+});
+
+export const hintHeatmap2Quarters = (game_id, quarters) => ({
+  type: GET_HINT_HEATMAP_2_QUARTERS,
+  payload: {
+    game_id,
+    quarters
+  }
+})
+
+export const hintScoresSuperiority = (game_id) => ({
+  type: SCORES_SUPERIORITY,
+  payload: {
+    game_id
+  }
+})
 
 export const singleHelp = () => ({
   type: SINGLE_HELP,

@@ -1,5 +1,5 @@
 import { React, useState } from "react";
-import {Modal, Button, Alert, message} from 'antd';
+import { Modal, Button } from 'antd';
 import styled from "styled-components";
 import Players from "../GameInfo/components/Players/Players";
 import {
@@ -59,7 +59,7 @@ const HelpItem = styled.div`
 
     &:hover {
       transform: scale(1.03);
-      //background: rgba(0,0,0,.13);
+      background: rgba(0,0,0,.13);
       box-shadow: 0 2px 20px rgba(0,0,0,.15);
     }
 
@@ -88,7 +88,7 @@ const Help = ({
     hintCounter,
     setHintCounter
 }) => {
-    const hints_for_choice = [hints[0], hints[1], hints[2]];
+    const hints_for_choice = hints;
     const [isModalVisible, setIsModalVisible] = useState(false);
 
     const showModal = () => {
@@ -139,7 +139,7 @@ const Help = ({
                         }
                         }
                     >
-                        <div className="button" onClick={() => showModal()} style={{ border: hintBadgeColor}}>
+                        <div className="button" /*onClick={() => showModal()}*/ style={{ border: hintBadgeColor }}>
                             <span className="content">{item['name']}</span>
                             <span className="badge" style={{ border: hintBadgeColor }}>{item['fine']}</span>
                         </div>

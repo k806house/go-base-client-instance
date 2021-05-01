@@ -8,7 +8,9 @@ import {
   SET_BLOCKED,
   MAP_STONES,
   SCORES,
-  SCORES_WINNER } from "./types";
+  SCORES_WINNER,
+  GET_SCORES_SUPERIORITY
+} from "./types";
 import { MAP_HALF, MAP_QUARTERS } from "../../pages/GameBoard/components/Help/types";
 
 const initialState = {
@@ -56,13 +58,48 @@ export const boardReducer = (state = initialState, action) => {
         mapStones: action.payload,
         blocked: false
       };
+    case GET_SCORES_SUPERIORITY:
+      console.log(action.payload);
+      return {
+        ...state,
+        scoresWinner: action.payload,
+        blocked: false
+      };
     case MAP_HELP:
-
       if (action.payload.zone) {
         var {
           mapStones,
           classNamesMapStones
         } = action.payload.isQuarter ? MAP_QUARTERS[action.payload.zone] : MAP_HALF[action.payload.zone];
+        console.log(action.payload.zone);
+      } else if (action.payload.quarter) {
+        var mapStones = {};
+        var classNamesMapStones = {};
+        let alpha = 'ABCDEFGHJKLMNOPQRSTUV'
+        action.payload.quarter.map((row, rowId) => {
+          row.map((cell, colId) => {
+            if (parseInt(cell) !== 0) {
+              let sign = alpha[rowId];
+              let coord = `${sign}${(colId + 1)}`;
+              mapStones[coord] = "circle"
+              classNamesMapStones[coord] = `redstone size-${cell}`
+            }
+          })
+        })
+      } else if (action.payload.quarters) {
+        var mapStones = {};
+        var classNamesMapStones = {};
+        let alpha = 'ABCDEFGHJKLMNOPQRSTUV'
+        action.payload.quarters.map((row, rowId) => {
+          row.map((cell, colId) => {
+            if (parseInt(cell) !== 0) {
+              let sign = alpha[rowId];
+              let coord = `${sign}${(colId + 1)}`;
+              mapStones[coord] = "circle"
+              classNamesMapStones[coord] = `redstone size-${cell}`
+            }
+          })
+        })
       } else {
         var mapStones = {};
         var classNamesMapStones = {};

@@ -154,8 +154,31 @@ const Bulb = styled.p`
 `;
 
 let timesCal = null;
+let hintDelay = 2;
 
-export const Header = ({ history, gameId, setHint, hint, setResign, helpType, setPass, viewPass, view }) => {
+export const Header = ({ history, gameId, setHint, hint, setResign, helpType, setPass, viewPass, view, times}) => {
+  const [timer, setTimer] = useState(hintDelay);
+
+  useEffect(async () => {
+    await clearTimeout(timesCal);
+    setTimer(hintDelay);
+    timesDelay(hintDelay, true);
+  }, [times]);
+
+
+  const timesDelay = (t, start) => {
+    if (t > 0) {
+      timesCal = setTimeout(() => {
+        const time = t - 1;
+        setTimer(time);
+        if (start) {
+          timesDelay(time, start)
+        }
+      }, 1000)
+    } else {
+      clearTimeout(timesCal)
+    }
+  };
 
   return (
     <Wrapper>
@@ -169,13 +192,14 @@ export const Header = ({ history, gameId, setHint, hint, setResign, helpType, se
               <Text onClick={() => setPass()}>Пас</Text>
             )}
             <Text onClick={() => setResign()}>Сдаться</Text>
+            <GameId>ID игры: {gameId}</GameId>
             {/*{view && (*/}
             {/*  <TextHint onClick={() => setHint(!hint)} hint={hint}>Взять подсказку</TextHint>*/}
             {/*)}*/}
+            {/*{console.log(timer)}*/}
           </Menu>
         </Left>
-        <GameId>ID игры: {gameId}</GameId>
-        {view && (<Bulb onClick={() => setHint(!hint)} hint={hint}>
+        {view && timer===0 && (<Bulb onClick={() => setHint(!hint)} hint={hint}>
           <input type="checkbox"/>
           <div></div>
         </Bulb>)}

@@ -275,6 +275,7 @@ const GameBoard = ({ history }) => {
         view={stepColor === yourColor}
         timeOut={() => alert('End Time')}
         timer={stepColor === yourColor}
+        times={times}
       />
       <Flex>
         {blocked && (

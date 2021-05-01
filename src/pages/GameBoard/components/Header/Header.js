@@ -69,6 +69,7 @@ const Bulb = styled.p`
   * {
     margin: 0;
     padding: 0;
+    cursor: pointer;
   }
 
   body {
@@ -168,9 +169,9 @@ export const Header = ({ history, gameId, setHint, hint, setResign, helpType, se
               <Text onClick={() => setPass()}>Пас</Text>
             )}
             <Text onClick={() => setResign()}>Сдаться</Text>
-            {view && (
-              <TextHint onClick={() => setHint(!hint)} hint={hint}>Взять подсказку</TextHint>
-            )}
+            {/*{view && (*/}
+            {/*  <TextHint onClick={() => setHint(!hint)} hint={hint}>Взять подсказку</TextHint>*/}
+            {/*)}*/}
           </Menu>
         </Left>
         <GameId>ID игры: {gameId}</GameId>

@@ -1,5 +1,5 @@
 import { React, useState } from "react";
-import { Modal, Button } from 'antd';
+import {Modal, Button, Alert, message} from 'antd';
 import styled from "styled-components";
 import Players from "../GameInfo/components/Players/Players";
 import {
@@ -7,6 +7,7 @@ import {
     HEATMAP_ZONE_QUARTER,
     hints
 } from "./types";
+
 
 const Wrapper = styled.div`
   width: 46%;
@@ -58,7 +59,7 @@ const HelpItem = styled.div`
 
     &:hover {
       transform: scale(1.03);
-      background: rgba(0,0,0,.13);
+      //background: rgba(0,0,0,.13);
       box-shadow: 0 2px 20px rgba(0,0,0,.15);
     }
 
@@ -129,9 +130,6 @@ const Help = ({
                         active={activeHelpId === item['id']}
                         onClick={() => {
                             // scores && handleHelp(item['handleHelp']);
-                            console.log(hintCounter.counter + " counter");
-                            console.log(hintCounter.lastHintStep + " last");
-                            console.log(stepMain + " main");
                             if (hintCounter.lastHintStep + 1 === stepMain || hintCounter.lastHintStep === stepMain || stepMain === 0) {
                                 setHintCounter({ counter: hintCounter.counter + 1, lastHintStep: stepMain });
                             } else {
@@ -141,7 +139,7 @@ const Help = ({
                         }
                         }
                     >
-                        <div className="button" onClick={() => showModal()} style={{ border: hintBadgeColor }}>
+                        <div className="button" onClick={() => showModal()} style={{ border: hintBadgeColor}}>
                             <span className="content">{item['name']}</span>
                             <span className="badge" style={{ border: hintBadgeColor }}>{item['fine']}</span>
                         </div>

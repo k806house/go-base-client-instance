@@ -105,6 +105,7 @@ const GameBoard = ({ history }) => {
 
   useEffect(() => {
     if (game_id) {
+      setProverb(proverbs[Math.floor(Math.random() * proverbs.length)]);
       client.send(JSON.stringify([5, 'go/game']));
       client.send(JSON.stringify([7, "go/game", {command: "auth", token: localStorage.getItem('GoGameToken'), game_id: game_id}]));
     }
@@ -282,10 +283,6 @@ const GameBoard = ({ history }) => {
       setMultipleHint(mapStones)
     }
   }
-  // if (stepMain === 0) {
-  //   setProverb(proverbs[Math.floor(Math.random() * proverbs.length)]);
-  // }
-  console.log(proverb);
   return (
     <Wrapper>
       <Header

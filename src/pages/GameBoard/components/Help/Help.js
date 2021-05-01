@@ -25,10 +25,10 @@ const HelpWrapper = styled.div`
 
 const HelpItem = styled.div`
   width: 48%;
-  margin-bottom: 10px;
-  // background: ${(props) => (props.active ? "#D8AD63" : "#f6f6f6")};
-  padding: 20px;
+  margin-bottom: 5px;
+  padding: 18px;
   cursor: pointer;
+  font-size: 18px;
 
   .badge {
     border-radius: 50%;
@@ -42,7 +42,7 @@ const HelpItem = styled.div`
     align-items: center;
     justify-content: center;
     top: -15px;
-    right: 245px;
+    right: 250px;
     transition: all .3s;
   }
 

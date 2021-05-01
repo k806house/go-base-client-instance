@@ -87,7 +87,7 @@ const Help = ({
     hintCounter,
     setHintCounter
 }) => {
-    const hints_for_choice = [hints[0], hints[1], hints[2]];
+    const hints_for_choice = hints;
     const [isModalVisible, setIsModalVisible] = useState(false);
 
     const showModal = () => {
@@ -128,7 +128,7 @@ const Help = ({
                     return <HelpItem
                         active={activeHelpId === item['id']}
                         onClick={() => {
-                            // scores && handleHelp(item['handleHelp']);
+                            scores && handleHelp(item['handleHelp']);
                             console.log(hintCounter.counter + " counter");
                             console.log(hintCounter.lastHintStep + " last");
                             console.log(stepMain + " main");
@@ -141,7 +141,7 @@ const Help = ({
                         }
                         }
                     >
-                        <div className="button" onClick={() => showModal()} style={{ border: hintBadgeColor }}>
+                        <div className="button" /*onClick={() => showModal()}*/ style={{ border: hintBadgeColor }}>
                             <span className="content">{item['name']}</span>
                             <span className="badge" style={{ border: hintBadgeColor }}>{item['fine']}</span>
                         </div>

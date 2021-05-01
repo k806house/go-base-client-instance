@@ -22,13 +22,13 @@ const GameInfo = ({ stepColor, enemyPass, yourColor, you, opponent, turns, stepM
     <Wrapper>
       <Players enemyPass={enemyPass} opponent={opponent} you={you} stepColor={stepColor} yourColor={yourColor} stepMain={stepMain} stepTwo={stepTwo} times={times} />
       <Info turns={turns}/>
-        <TextBlock>
-            <Card style={{ width: 300 }}>
-                <p>Card content</p>
-                <p>Card content</p>
-                <p>Card content</p>
-            </Card>
-        </TextBlock>
+        {/*<TextBlock>*/}
+        {/*    <Card style={{ width: 300 }}>*/}
+        {/*        <p>Card content</p>*/}
+        {/*        <p>Card content</p>*/}
+        {/*        <p>Card content</p>*/}
+        {/*    </Card>*/}
+        {/*</TextBlock>*/}
     </Wrapper>
   );
 };

@@ -43,6 +43,7 @@ const Help = ({
     scores,
     times
   }) => {
+    //console.log(handleHelp);
   return (
     <Wrapper>
       <Players

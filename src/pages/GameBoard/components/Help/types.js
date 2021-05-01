@@ -37,11 +37,11 @@ export const hints = [
   { 'id': 1,
     'handleHelp':{ type: "single", id: 1, count: 1 }},
   { 'id': 16,
-    'handleHelp':{ type: "multiple", multipleHandleCount: 4, id: 16 },
+    'handleHelp':{ type: "multiple", multipleHandleCount: 4, id: 16 }},
   { 'id': 13,
     'handleHelp':{ type: "map", id: HEATMAP_FULL }},
   { 'id': 23,
     'handleHelp':{ type: "map", id: HEATMAP_ZONE_QUARTER }},
   { 'id': 34,
-    'handleHelp':{ { type: "score", id: 34 }},
-]
+    'handleHelp':{ type: "score", id: 34 }},
+];

@@ -3,8 +3,6 @@ import styled from "styled-components";
 import Players from './components/Players/Players'
 import Info from './components/Info/Info'
 
-import { Card } from 'antd';
-
 const Wrapper = styled.div`
   width: 46%;
   margin-left: 25px;
@@ -17,18 +15,12 @@ const TextBlock = styled.div`
   padding: 20px 40px;
 `;
 
-const GameInfo = ({ stepColor, enemyPass, yourColor, you, opponent, turns, stepMain, stepTwo, times }) => {
+const GameInfo = ({ stepColor, enemyPass, yourColor, you, opponent, turns, stepMain, stepTwo, times, proverb, setProverb }) => {
   return (
     <Wrapper>
       <Players enemyPass={enemyPass} opponent={opponent} you={you} stepColor={stepColor} yourColor={yourColor} stepMain={stepMain} stepTwo={stepTwo} times={times} />
       <Info turns={turns}/>
-        {/*<TextBlock>*/}
-        {/*    <Card style={{ width: 300 }}>*/}
-        {/*        <p>Card content</p>*/}
-        {/*        <p>Card content</p>*/}
-        {/*        <p>Card content</p>*/}
-        {/*    </Card>*/}
-        {/*</TextBlock>*/}
+        <h1>{proverb}</h1>
     </Wrapper>
   );
 };

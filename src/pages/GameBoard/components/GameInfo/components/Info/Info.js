@@ -15,7 +15,7 @@ const Text = styled.p`
 `;
 
 const Info = ({turns}) => {
-  return (
+    return (
     <Wrapper>
       <TextBlock>
         {turns.map((item)=>{

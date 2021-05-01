@@ -29,6 +29,7 @@ import {
 import {notification} from "antd";
 import {SmileOutlined} from '@ant-design/icons';
 import "antd/dist/antd.css";
+import { proverbs } from "./proverbs"
 
 const Wrapper = styled.div`
   max-width: 1377px;
@@ -78,7 +79,7 @@ const GameBoard = ({ history }) => {
   const dispatch = useDispatch();
   const [times, setTimes] = useState({playerOne: 0, playerTwo: 0});
   const [hintCounter, setHintCounter] = useState({counter: 0, lastHintStep: -1});
-
+  const [proverb, setProverb] = useState('');
 
   const openNotification = () => {
     notification.open({
@@ -281,7 +282,10 @@ const GameBoard = ({ history }) => {
       setMultipleHint(mapStones)
     }
   }
-
+  // if (stepMain === 0) {
+  //   setProverb(proverbs[Math.floor(Math.random() * proverbs.length)]);
+  // }
+  console.log(proverb);
   return (
     <Wrapper>
       <Header
@@ -334,7 +338,8 @@ const GameBoard = ({ history }) => {
             enemyPass={enemyPass}
             stepMain={stepMain}
             times={times}
-            stepTwo={stepTwo} />
+            stepTwo={stepTwo}
+            proverb={proverb}/>
         ) : (
           <Help
             you={you}

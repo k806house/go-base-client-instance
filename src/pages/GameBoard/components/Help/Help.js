@@ -26,9 +26,49 @@ const HelpWrapper = styled.div`
 const HelpItem = styled.div`
   width: 48%;
   margin-bottom: 10px;
-  background: ${(props) => (props.active ? "#D8AD63" : "#f6f6f6")};
-  padding: 10px;
+  // background: ${(props) => (props.active ? "#D8AD63" : "#f6f6f6")};
+  padding: 20px;
   cursor: pointer;
+
+  .badge {
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: block;
+    position: absolute;
+    background: white;
+    border: 2px solid red;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: -15px;
+    right: 245px;
+    transition: all .3s;
+  }
+
+  .button {
+    position: relative;
+    //border: 2px solid red;
+    padding: 15px 30px;
+    color: black;
+    background: white;
+    cursor: pointer;
+    user-select: none;
+
+    &:hover {
+      transform: scale(1.03);
+      background: rgba(0,0,0,.13);
+      box-shadow: 0 2px 20px rgba(0,0,0,.15);
+    }
+
+    &:active {
+      transform: scale(.96);
+
+      .badge {
+        transform: scale(1.2);
+      }
+    }
+  }
 `;
 
 const Help = ({
@@ -58,17 +98,40 @@ const Help = ({
         times={times}
       />
       <HelpWrapper>
+          {/*{hints_for_choice.map((item)=>{*/}
+          {/*    return <HelpItem*/}
+          {/*        active={activeHelpId === item['id']}*/}
+          {/*        onClick={() =>*/}
+          {/*        scores && handleHelp(item['handleHelp'])*/}
+          {/*        }*/}
+          {/*    >*/}
+          {/*        {item['name']}*/}
+          {/*    </HelpItem>*/}
+          {/*})}*/}
+
           {hints_for_choice.map((item)=>{
-              return
-              <HelpItem
+              let hintBadgeColor = '2px solid orange';
+              if (item['fine'] === 2) {
+                  hintBadgeColor = '2px solid orange';
+              } else if (item['fine'] === 3) {
+                  hintBadgeColor = '2px solid red';
+              } else if (item['fine'] === 1) {
+                  hintBadgeColor = '2px solid green';
+              }
+
+              return <HelpItem
                   active={activeHelpId === item['id']}
                   onClick={() =>
-                  scores && handleHelp(item['handleHelp'])
+                      scores && handleHelp(item['handleHelp'])
                   }
               >
-                  {item['name']}
+                  <div className="button" style={{border: hintBadgeColor}}>
+                      <span className="content">{item['name']}</span>
+                      <span className="badge" style={{border: hintBadgeColor}}>{item['fine']}</span>
+                  </div>
               </HelpItem>
           })}
+
         {/*<HelpItem*/}
         {/*  active={activeHelpId === HEATMAP_FULL}*/}
         {/*  onClick={() =>*/}

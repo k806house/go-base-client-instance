@@ -44,7 +44,7 @@ const Help = ({
     scores,
     times
   }) => {
-    console.log(hints);
+    const hints_for_choice = [hints[0], hints[1], hints[2]];
   return (
     <Wrapper>
       <Players
@@ -58,45 +58,48 @@ const Help = ({
         times={times}
       />
       <HelpWrapper>
-        <HelpItem
-          active={activeHelpId === hints[0]['id']}
-          onClick={() =>
-            scores && handleHelp(hints[0]['handleHelp'])
-          }
-        >
-            {hints[0]['name']}
-        </HelpItem>
-        <HelpItem
-          active={activeHelpId === HEATMAP_FULL}
-          onClick={() =>
-            scores && handleHelp({ type: "map", id: HEATMAP_FULL })
-          }
-        >
-          Тепловая карта всей доски. Детализированная
-        </HelpItem>
-        <HelpItem
-          active={activeHelpId === 16}
-          onClick={() =>
-            scores &&
-            handleHelp({ type: "multiple", multipleHandleCount: 4, id: 16 })
-          }
-        >
-          Показать лучший из заданных 3 ходов
-        </HelpItem>
-        <HelpItem
-          active={activeHelpId === HEATMAP_ZONE_QUARTER}
-          onClick={() =>
-            scores && handleHelp({ type: "map", id: HEATMAP_ZONE_QUARTER })
-          }
-        >
-          В какой четверти доски сейчас лучший ход?
-        </HelpItem>
-        <HelpItem
-          active={activeHelpId === 34}
-          onClick={() => scores && handleHelp({ type: "score", id: 34 })}
-        >
-          Кто побеждает на данный момент?
-        </HelpItem>
+          {hints_for_choice.map((item)=>{
+              return
+              <HelpItem
+                  active={activeHelpId === item['id']}
+                  onClick={() =>
+                  scores && handleHelp(item['handleHelp'])
+                  }
+              >
+                  {item['name']}
+              </HelpItem>
+          })}
+        {/*<HelpItem*/}
+        {/*  active={activeHelpId === HEATMAP_FULL}*/}
+        {/*  onClick={() =>*/}
+        {/*    scores && handleHelp({ type: "map", id: HEATMAP_FULL })*/}
+        {/*  }*/}
+        {/*>*/}
+        {/*  Тепловая карта всей доски. Детализированная*/}
+        {/*</HelpItem>*/}
+        {/*<HelpItem*/}
+        {/*  active={activeHelpId === 16}*/}
+        {/*  onClick={() =>*/}
+        {/*    scores &&*/}
+        {/*    handleHelp({ type: "multiple", multipleHandleCount: 4, id: 16 })*/}
+        {/*  }*/}
+        {/*>*/}
+        {/*  Показать лучший из заданных 3 ходов*/}
+        {/*</HelpItem>*/}
+        {/*<HelpItem*/}
+        {/*  active={activeHelpId === HEATMAP_ZONE_QUARTER}*/}
+        {/*  onClick={() =>*/}
+        {/*    scores && handleHelp({ type: "map", id: HEATMAP_ZONE_QUARTER })*/}
+        {/*  }*/}
+        {/*>*/}
+        {/*  В какой четверти доски сейчас лучший ход?*/}
+        {/*</HelpItem>*/}
+        {/*<HelpItem*/}
+        {/*  active={activeHelpId === 34}*/}
+        {/*  onClick={() => scores && handleHelp({ type: "score", id: 34 })}*/}
+        {/*>*/}
+        {/*  Кто побеждает на данный момент?*/}
+        {/*</HelpItem>*/}
       </HelpWrapper>
     </Wrapper>
   );

@@ -29,6 +29,11 @@ import {
   HEATMAP_ZONE_QUARTER,
 } from "./components/Help/types";
 
+import {notification} from "antd";
+import {SmileOutlined} from '@ant-design/icons';
+import "antd/dist/antd.css";
+import { proverbs } from "./proverbs"
+
 const Wrapper = styled.div`
   max-width: 1377px;
   margin: 0 auto;
@@ -70,13 +75,23 @@ const GameBoard = ({ history }) => {
   const [coordinates, setCoordinates] = useState({});
   const [you, setYou] = useState({});
   const [opponent, setOpponent] = useState({});
-  const [stepMain, setStepMain] = useState(0)
-  const [stepTwo, setStepTwo] = useState(0)
-  const [stepColor, setStepColor] = useState('white')
-  const [classNames, setClassNames] = useState({})
+  const [stepMain, setStepMain] = useState(0);
+  const [stepTwo, setStepTwo] = useState(0);
+  const [stepColor, setStepColor] = useState('white');
+  const [classNames, setClassNames] = useState({});
   const dispatch = useDispatch();
-  const [times, setTimes] = useState({playerOne: 0, playerTwo: 0})
-  
+  const [times, setTimes] = useState({playerOne: 0, playerTwo: 0});
+  const [hintCounter, setHintCounter] = useState({counter: 0, lastHintStep: -1});
+  const [proverb, setProverb] = useState('');
+
+  const openNotification = () => {
+    notification.open({
+      message: 'Три подсказки подряд!',
+      description:
+          'Возможно стоит подумать самому?',
+      icon: <SmileOutlined rotate={180} />
+    });
+  };
 
   useEffect(() => {
     if (Object.keys(multipleHint).length === multipleCount) {
@@ -93,10 +108,18 @@ const GameBoard = ({ history }) => {
 
   useEffect(() => {
     if (game_id) {
+      setProverb(proverbs[Math.floor(Math.random() * proverbs.length)]);
       client.send(JSON.stringify([5, 'go/game']));
       client.send(JSON.stringify([7, "go/game", {command: "auth", token: localStorage.getItem('GoGameToken'), game_id: game_id}]));
     }
   },[])
+
+  useEffect(()=>{
+    if (hintCounter.counter===3){
+      openNotification();
+      setHintCounter({counter: 0, lastHintStep: -1});
+    }
+  }, [hintCounter]);
 
   client.onmessage = function(e) {
     setEnemyPass(false)
@@ -297,7 +320,6 @@ const GameBoard = ({ history }) => {
       setMultipleHint(mapStones)
     }
   }
-
   return (
     <Wrapper>
       <Header
@@ -313,6 +335,8 @@ const GameBoard = ({ history }) => {
         timeOut={() => alert('End Time')}
         timer={stepColor === yourColor}
         times={times}
+        hintCounter={hintCounter}
+        setHintCounter = {setHintCounter}
       />
       <Flex>
         {blocked && (
@@ -348,7 +372,8 @@ const GameBoard = ({ history }) => {
             enemyPass={enemyPass}
             stepMain={stepMain}
             times={times}
-            stepTwo={stepTwo} />
+            stepTwo={stepTwo}
+            proverb={proverb}/>
         ) : (
           <Help
             you={you}
@@ -368,6 +393,8 @@ const GameBoard = ({ history }) => {
             activeHelpId={activeHelpId}
             times={times}
             scores={stepColor !== yourColor ? false : true}
+            hintCounter={hintCounter}
+            setHintCounter = {setHintCounter}
           />
         )}
       </Flex>

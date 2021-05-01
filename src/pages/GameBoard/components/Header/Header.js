@@ -156,7 +156,7 @@ const Bulb = styled.p`
 let timesCal = null;
 let hintDelay = 2;
 
-export const Header = ({ history, gameId, setHint, hint, setResign, helpType, setPass, viewPass, view, times}) => {
+export const Header = ({ history, gameId, setHint, hint, setResign, helpType, setPass, viewPass, view, times, hintCounter, setHintCounter}) => {
   const [timer, setTimer] = useState(hintDelay);
 
   useEffect(async () => {
@@ -193,13 +193,9 @@ export const Header = ({ history, gameId, setHint, hint, setResign, helpType, se
             )}
             <Text onClick={() => setResign()}>Сдаться</Text>
             <GameId>ID игры: {gameId}</GameId>
-            {/*{view && (*/}
-            {/*  <TextHint onClick={() => setHint(!hint)} hint={hint}>Взять подсказку</TextHint>*/}
-            {/*)}*/}
-            {/*{console.log(timer)}*/}
           </Menu>
         </Left>
-        {view && timer===0 && (<Bulb onClick={() => setHint(!hint)} hint={hint}>
+        {view && timer===0 && (<Bulb onClick={() => {setHint(!hint)}} hint={hint}>
           <input type="checkbox"/>
           <div></div>
         </Bulb>)}

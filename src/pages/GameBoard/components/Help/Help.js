@@ -1,9 +1,10 @@
-import React from "react";
+import { React, useState } from "react";
+import { Modal, Button } from 'antd';
 import styled from "styled-components";
 import Players from "../GameInfo/components/Players/Players";
 import {
-  HEATMAP_FULL,
-  HEATMAP_ZONE_QUARTER,
+    HEATMAP_FULL,
+    HEATMAP_ZONE_QUARTER,
     hints
 } from "./types";
 
@@ -25,10 +26,50 @@ const HelpWrapper = styled.div`
 
 const HelpItem = styled.div`
   width: 48%;
-  margin-bottom: 10px;
-  background: ${(props) => (props.active ? "#D8AD63" : "#f6f6f6")};
-  padding: 10px;
+  margin-bottom: 5px;
+  padding: 18px;
   cursor: pointer;
+  font-size: 18px;
+
+  .badge {
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: block;
+    position: absolute;
+    background: white;
+    border: 2px solid red;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: -15px;
+    right: 250px;
+    transition: all .3s;
+  }
+
+  .button {
+    position: relative;
+    //border: 2px solid red;
+    padding: 15px 30px;
+    color: black;
+    background: white;
+    cursor: pointer;
+    user-select: none;
+
+    &:hover {
+      transform: scale(1.03);
+      background: rgba(0,0,0,.13);
+      box-shadow: 0 2px 20px rgba(0,0,0,.15);
+    }
+
+    &:active {
+      transform: scale(.96);
+
+      .badge {
+        transform: scale(1.2);
+      }
+    }
+  }
 `;
 
 const Help = ({
@@ -42,67 +83,78 @@ const Help = ({
     handleHelp,
     activeHelpId,
     scores,
-    times
-  }) => {
-    // const hints_for_choice = [hints[0], hints[1], hints[2]];
-    const hints_for_choice = hints;
-  return (
-    <Wrapper>
-      <Players
-        enemyPass={enemyPass}
-        opponent={opponent}
-        you={you}
-        stepColor={stepColor}
-        yourColor={yourColor}
-        stepMain={stepMain}
-        stepTwo={stepTwo}
-        times={times}
-      />
-      <HelpWrapper>
-          {hints_for_choice.map((item)=>{
-              return <HelpItem
-                  active={activeHelpId === item['id']}
-                  onClick={() =>
-                  scores && handleHelp(item['handleHelp'])
-                  }
-              >
-                  {item['name']}
-              </HelpItem>
-          })}
-        {/*<HelpItem*/}
-        {/*  active={activeHelpId === HEATMAP_FULL}*/}
-        {/*  onClick={() =>*/}
-        {/*    scores && handleHelp({ type: "map", id: HEATMAP_FULL })*/}
-        {/*  }*/}
-        {/*>*/}
-        {/*  Тепловая карта всей доски. Детализированная*/}
-        {/*</HelpItem>*/}
-        {/*<HelpItem*/}
-        {/*  active={activeHelpId === 16}*/}
-        {/*  onClick={() =>*/}
-        {/*    scores &&*/}
-        {/*    handleHelp({ type: "multiple", multipleHandleCount: 4, id: 16 })*/}
-        {/*  }*/}
-        {/*>*/}
-        {/*  Показать лучший из заданных 3 ходов*/}
-        {/*</HelpItem>*/}
-        {/*<HelpItem*/}
-        {/*  active={activeHelpId === HEATMAP_ZONE_QUARTER}*/}
-        {/*  onClick={() =>*/}
-        {/*    scores && handleHelp({ type: "map", id: HEATMAP_ZONE_QUARTER })*/}
-        {/*  }*/}
-        {/*>*/}
-        {/*  В какой четверти доски сейчас лучший ход?*/}
-        {/*</HelpItem>*/}
-        {/*<HelpItem*/}
-        {/*  active={activeHelpId === 34}*/}
-        {/*  onClick={() => scores && handleHelp({ type: "score", id: 34 })}*/}
-        {/*>*/}
-        {/*  Кто побеждает на данный момент?*/}
-        {/*</HelpItem>*/}
-      </HelpWrapper>
-    </Wrapper>
-  );
+    times,
+    hintCounter,
+    setHintCounter
+}) => {
+    const hints_for_choice = [hints[0], hints[1], hints[2]];
+    const [isModalVisible, setIsModalVisible] = useState(false);
+
+    const showModal = () => {
+        setIsModalVisible(true);
+    };
+
+    const handleOk = () => {
+        setIsModalVisible(false);
+    };
+
+    const handleCancel = () => {
+        setIsModalVisible(false);
+    };
+
+    return (
+        <Wrapper>
+            <Players
+                enemyPass={enemyPass}
+                opponent={opponent}
+                you={you}
+                stepColor={stepColor}
+                yourColor={yourColor}
+                stepMain={stepMain}
+                stepTwo={stepTwo}
+                times={times}
+            />
+            <HelpWrapper>
+                {hints_for_choice.map((item) => {
+                    let hintBadgeColor = '2px solid orange';
+                    if (item['fine'] === 2) {
+                        hintBadgeColor = '2px solid orange';
+                    } else if (item['fine'] === 3) {
+                        hintBadgeColor = '2px solid red';
+                    } else if (item['fine'] === 1) {
+                        hintBadgeColor = '2px solid green';
+                    }
+
+                    return <HelpItem
+                        active={activeHelpId === item['id']}
+                        onClick={() => {
+                            // scores && handleHelp(item['handleHelp']);
+                            console.log(hintCounter.counter + " counter");
+                            console.log(hintCounter.lastHintStep + " last");
+                            console.log(stepMain + " main");
+                            if (hintCounter.lastHintStep + 1 === stepMain || hintCounter.lastHintStep === stepMain || stepMain === 0) {
+                                setHintCounter({ counter: hintCounter.counter + 1, lastHintStep: stepMain });
+                            } else {
+                                ;
+                                setHintCounter({ counter: 0, lastHintStep: -1 });
+                            }
+                        }
+                        }
+                    >
+                        <div className="button" onClick={() => showModal()} style={{ border: hintBadgeColor }}>
+                            <span className="content">{item['name']}</span>
+                            <span className="badge" style={{ border: hintBadgeColor }}>{item['fine']}</span>
+                        </div>
+                        <Modal title="Basic Modal" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+                            <p>Some contents...</p>
+                            <p>Some contents...</p>
+                            <p>Some contents...</p>
+                        </Modal>
+                    </HelpItem>
+                })}
+            </HelpWrapper>
+        </Wrapper>
+    );
 };
 
 export default Help;

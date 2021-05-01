@@ -26,7 +26,8 @@
     "web-vitals": "^1.0.1",
     "websocket": "^1.0.34",
     "wgo": "^3.0.0-alpha.7",
-    "ws": "^7.4.5"
+    "ws": "^7.4.5",
+    "@ant-design/icons": "latest"
   },
   "scripts": {
     "start": "react-scripts start",

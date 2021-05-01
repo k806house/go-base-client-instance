@@ -175,10 +175,10 @@ export const Header = ({ history, gameId, setHint, hint, setResign, helpType, se
           </Menu>
         </Left>
         <GameId>ID игры: {gameId}</GameId>
-        <Bulb onClick={() => setHint(!hint)} hint={hint}>
+        {view && (<Bulb onClick={() => setHint(!hint)} hint={hint}>
           <input type="checkbox"/>
           <div></div>
-        </Bulb>
+        </Bulb>)}
       </Content>
     </Wrapper>
   );

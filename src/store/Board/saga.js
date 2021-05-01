@@ -8,14 +8,21 @@ import {
   MAP_HELP,
   GET_HINT_HEATMAP_ZONE,
   SCORES_WINNER,
-  GET_SCORES_WINNER
+  GET_SCORES_WINNER,
+  GET_HINT_HEATMAP_QUARTER,
+  GET_HINT_HEATMAP_2_QUARTERS,
+  SCORES_SUPERIORITY,
+  GET_SCORES_SUPERIORITY
 } from "./types";
 import {
   helpBestMoves,
   helpShowBest,
   helpHeatmapFull,
   helpHeatmapZone,
-  scoresWinner
+  scoresWinner,
+  helpHeatmapZoneQuarter,
+  helpHeatmapZone2Quarters,
+  scoresDiff
 } from "../../api/board";
 
 function* fetchGetHintBestMoves_saga(action) {
@@ -72,6 +79,44 @@ function* fetchGetHintHeatmapZone_saga(action) {
   }
 }
 
+function* fetchGetHintHeatmapQuarter_saga(action) {
+  const { payload } = action;
+
+  try {
+    const res = yield call(helpHeatmapZoneQuarter, getToken(), payload.game_id, payload.quarter);
+
+    if (res.hint) {
+      yield put({
+        type: MAP_HELP,
+        payload: {
+          quarter: res.hint
+        }
+      })
+    }
+  } catch (e) {
+    // throw e;
+  }
+}
+
+function* fetchGetHintHeatmap2Quarters_saga(action) {
+  const { payload } = action;
+
+  try {
+    const res = yield call(helpHeatmapZone2Quarters, getToken(), payload.game_id, payload.quarters);
+
+    if (res.hint) {
+      yield put({
+        type: MAP_HELP,
+        payload: {
+          quarters: res.hint
+        }
+      })
+    }
+  } catch (e) {
+    // throw e;
+  }
+}
+
 function* fetchGetHintScoresWinner_saga(action) {
   const { payload } = action;
   try {
@@ -84,6 +129,23 @@ function* fetchGetHintScoresWinner_saga(action) {
   }
 }
 
+function* fetchGetHintScoresSuperiority_saga(action) {
+  const { payload } = action;
+
+  try {
+    const res = yield call(scoresDiff, getToken(), payload.game_id);
+
+    if (res.hint) {
+      yield put({
+        type: GET_SCORES_SUPERIORITY,
+        payload: res.hint
+      })
+    }
+  } catch (e) {
+    // throw e;
+  }
+}
+
 export function* boardSaga() {
   yield all([
     takeLatest(GET_HINT_BEST_MOVES, fetchGetHintBestMoves_saga),
@@ -91,5 +153,8 @@ export function* boardSaga() {
     takeLatest(GET_HINT_HEATMAP_FULL, fetchGetHintHeatmapFull_saga),
     takeLatest(GET_HINT_HEATMAP_ZONE, fetchGetHintHeatmapZone_saga),
     takeLatest(GET_SCORES_WINNER, fetchGetHintScoresWinner_saga),
+    takeLatest(GET_HINT_HEATMAP_QUARTER, fetchGetHintHeatmapQuarter_saga),
+    takeLatest(GET_HINT_HEATMAP_2_QUARTERS, fetchGetHintHeatmap2Quarters_saga),
+    takeLatest(SCORES_SUPERIORITY, fetchGetHintScoresSuperiority_saga)
   ]);
 }

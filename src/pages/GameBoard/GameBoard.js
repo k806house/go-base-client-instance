@@ -16,6 +16,9 @@ import {
   hintShowBest,
   setScoresWinner,
   hintBestMoves,
+  hintHeatmapQuarter,
+  hintHeatmap2Quarters,
+  hintScoresSuperiority
 } from "../../store/Board/actions";
 
 import { clearGameId } from "../../store/GameCreate/actions";
@@ -197,6 +200,7 @@ const GameBoard = ({ history }) => {
     dispatch(markersClear());
     setMultipleHint({});
     setActiveHelpId(id);
+
     if (type === "single") {
       dispatch(setBlocked(true))
       setHelpType("single");
@@ -219,11 +223,44 @@ const GameBoard = ({ history }) => {
         case HEATMAP_ZONE_QUARTER:
           dispatch(hintHeatmapZone(game_id, true));
           break;
+        case 25:
+          dispatch(hintHeatmapQuarter(game_id, 1));
+          break;
+        case 26:
+          dispatch(hintHeatmapQuarter(game_id, 2));
+          break;
+        case 27:
+          dispatch(hintHeatmapQuarter(game_id, 3));
+          break;
+        case 28:
+          dispatch(hintHeatmapQuarter(game_id, 4));
+          break;
+        case 29:
+          dispatch(hintHeatmap2Quarters(game_id, "1,2"));
+          break;
+        case 30:
+          dispatch(hintHeatmap2Quarters(game_id, "3,4"));
+          break;
+        case 31:
+          dispatch(hintHeatmap2Quarters(game_id, "1,4"));
+          break;
+        case 32:
+          dispatch(hintHeatmap2Quarters(game_id, "2,3"));
+          break;
       }
     }
     if (type === "score") {
-      dispatch(setBlocked(true))
-      dispatch(setScoresWinner(game_id))
+      dispatch(setBlocked(true));
+      setHelpType("score");
+
+      switch (id) {
+        case 33:
+          dispatch(hintScoresSuperiority(game_id));
+          break;
+        case 34:
+          dispatch(setScoresWinner(game_id))
+          break;
+      }
     }
   };
 

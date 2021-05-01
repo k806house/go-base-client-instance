@@ -44,7 +44,8 @@ const Help = ({
     scores,
     times
   }) => {
-    const hints_for_choice = [hints[0], hints[1], hints[2]];
+    // const hints_for_choice = [hints[0], hints[1], hints[2]];
+    const hints_for_choice = hints;
   return (
     <Wrapper>
       <Players
@@ -59,8 +60,7 @@ const Help = ({
       />
       <HelpWrapper>
           {hints_for_choice.map((item)=>{
-              return
-              <HelpItem
+              return <HelpItem
                   active={activeHelpId === item['id']}
                   onClick={() =>
                   scores && handleHelp(item['handleHelp'])

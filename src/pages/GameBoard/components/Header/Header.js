@@ -153,8 +153,6 @@ const Bulb = styled.p`
   }
 `;
 
-let timesCal = null;
-
 export const Header = ({ history, gameId, setHint, hint, setResign, helpType, setPass, viewPass, view }) => {
 
   return (

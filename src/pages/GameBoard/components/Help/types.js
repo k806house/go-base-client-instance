@@ -32,3 +32,16 @@ export const MAP_HALF = {
   '1': getZone('ABCDEFGGHJKLMN', '7,8,9,10,11,12,13'),
   '2': getZone('ABCDEFGGHJKLMN', '1,2,3,4,5,6,7'),
 }
+
+export const hints = [
+  { 'id': 1,
+    'handleHelp':{ type: "single", id: 1, count: 1 }},
+  { 'id': 16,
+    'handleHelp':{ type: "multiple", multipleHandleCount: 4, id: 16 },
+  { 'id': 13,
+    'handleHelp':{ type: "map", id: HEATMAP_FULL }},
+  { 'id': 23,
+    'handleHelp':{ type: "map", id: HEATMAP_ZONE_QUARTER }},
+  { 'id': 34,
+    'handleHelp':{ { type: "score", id: 34 }},
+]

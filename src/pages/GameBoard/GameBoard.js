@@ -163,6 +163,7 @@ const GameBoard = ({ history }) => {
   },[])
 
   useEffect(()=>{
+    console.log("hintCounter"+hintCounter.counter);
     if (hintCounter.counter===3){
       openNotification();
       setHintCounter({counter: 0, lastHintStep: -1});
@@ -173,7 +174,6 @@ const GameBoard = ({ history }) => {
   useEffect(() => {
 
     dispatch(getGameInfo(game_id));
-    console.log(field);
     let crowdedQuarters = processHeatmapQuarters(field);
 
     setCrowdedQuarters(crowdedQuarters);

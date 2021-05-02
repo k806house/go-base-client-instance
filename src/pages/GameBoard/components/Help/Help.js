@@ -159,18 +159,23 @@ const Help = ({
     }
 
     currentQuarterTags = currentQuarterTags.sort();
+    console.log("currentQuarterTags sorted");
+    console.log(currentQuarterTags);
 
     if (currentQuarterTags.length === 1){
       if (currentQuarterTags[0]===tags.FIRST_QUARTER){
         hints_for_choice.push(hints[12])
       }
       if (currentQuarterTags[0]===tags.SECOND_QUARTER){
+        console.log("2f");
         hints_for_choice.push(hints[13])
       }
       if (currentQuarterTags[0]===tags.THIRD_QUARTER){
+        console.log(hints[14]);
         hints_for_choice.push(hints[14])
       }
       if (currentQuarterTags[0]===tags.FORTH_QUARTER){
+        console.log("4f");
         hints_for_choice.push(hints[15])
       }
     } else if (currentQuarterTags.length === 2){
@@ -191,7 +196,8 @@ const Help = ({
     }
 
     hints_for_choice = hints_for_choice.sort( (a, b) => a.fine - b.fine);
-    var sortedHints = hints.sort((a, b) => a.fine - b.fine);
+    var sortedHints = hints.slice();
+    sortedHints = sortedHints.sort((a, b) => a.fine - b.fine);
 
   const [isModalVisible, setIsModalVisible] = useState(false);
 
@@ -330,6 +336,8 @@ const Help = ({
                             counter: hintCounter.counter + 1,
                             lastHintStep: stepMain,
                           });
+                          console.log(hintCounter.counter + "hintCounerCounter");
+                          console.log(stepMain + "stepMain");
                         } else {
                           setHintCounter({ counter: 0, lastHintStep: -1 });
                         }

@@ -61,6 +61,38 @@ const Wrap = styled.div`
   z-index: 99999999;
 `;
 
+const processHeatmapQuarters = (field) => {
+  if (field == null) return;
+
+  let q1 = {sum: 0, q: 1}, q2 = {sum: 0, q: 2}, q3 = {sum: 0, q: 3}, q4 = {sum: 0, q: 4};
+
+  for (let i = 0; i < field.length; i++) {
+    for (let j = 0; j < field.length; j++) {
+      if (i < 6 && j < 6) {
+        q3.sum += Math.abs(field[i][j]);
+      } else if (i < 6 && j > 6) {
+        q2.sum += Math.abs(field[i][j]);
+      } else if (i > 6 && j < 6) {
+        q4.sum += Math.abs(field[i][j]);
+      } else if (i > 6 && j > 6) {
+        q1.sum += Math.abs(field[i][j]);
+      }
+    }
+  }
+
+  let sortedQs = [q1, q2, q3, q4].sort((a, b) => {
+    return b.sum - a.sum;
+  });
+
+  console.log(sortedQs[0].q);
+
+  if (sortedQs[1] > sortedQs[0]/2) {
+    return [sortedQs[0], sortedQs[1]];
+  } else {
+    return [sortedQs[0]];
+  }
+}
+
 const GameBoard = ({ history }) => {
 
   const game_id = useSelector((state) => state.createGame.id);
@@ -93,6 +125,7 @@ const GameBoard = ({ history }) => {
   const [proverb, setProverb] = useState('');
   const markers = useSelector((state) => state.board.markers);
   const [isKrasavchikVisible, setKrasavchikVisible] = useState(false);
+  const [crowdedQuarters, setCrowdedQuarters] = useState([]);
 
   if (guess in markers) {
       setKrasavchikVisible(true);
@@ -141,6 +174,9 @@ const GameBoard = ({ history }) => {
 
     dispatch(getGameInfo(game_id));
     console.log(field);
+    let crowdedQuarters = processHeatmapQuarters(field);
+
+    setCrowdedQuarters(crowdedQuarters);
 
   }, [ stepTwo ]);
 
@@ -430,6 +466,7 @@ const GameBoard = ({ history }) => {
             setHintCounter = {setHintCounter}
             hint = {hint}
             setGuess = {setGuess}
+            crowdedQuarters = {crowdedQuarters}
           />
         )}
       </Flex>

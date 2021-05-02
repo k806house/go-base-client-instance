@@ -248,10 +248,11 @@ const Help = ({
                       className="button"
                       style={{ border: hintBadgeColor }}
                       onClick={() => {
-                        showModal();
                         setCurItem(item);
                         if (item.id > 4) {
                           scores && handleHelp(item["handleHelp"]);
+                        } else {
+                            showModal();
                         }
                         if (
                           hintCounter.lastHintStep + 1 === stepMain ||

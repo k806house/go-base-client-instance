@@ -190,6 +190,8 @@ const Help = ({
       }
     }
 
+    hints_for_choice = hints_for_choice.sort( (a, b) => a.fine - b.fine);
+    var sortedHints = hints.sort((a, b) => a.fine - b.fine);
 
   const [isModalVisible, setIsModalVisible] = useState(false);
 
@@ -295,7 +297,7 @@ const Help = ({
           </TabPane>
           <TabPane tab="Все подсказки" key="2">
             <HelpWrapper>
-              {hints.map((item) => {
+              {sortedHints.map((item) => {
                 let hintBadgeColor = "2px solid orange";
                 if (item["fine"] === 2) {
                   hintBadgeColor = "2px solid orange";

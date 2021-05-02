@@ -3,6 +3,7 @@ import { Modal, Button, Tabs } from "antd";
 import styled from "styled-components";
 import Players from "../GameInfo/components/Players/Players";
 import { HEATMAP_FULL, HEATMAP_ZONE_QUARTER, hints } from "./types";
+import tags from "./tags";
 
 const { TabPane } = Tabs;
 
@@ -96,7 +97,51 @@ const Help = ({
   hint,
   setGuess,
 }) => {
-  const hints_for_choice = hints;
+  let currentQuarterTags = [];
+  let hints_for_choice = [];
+  let currentStepTag;
+  let currentWinrateTag;
+  let winrate = you.winrate.split("/");
+  let winrateCoefficient = +winrate[0] / +winrate[1];
+  //WINRATE ANAL
+  if (winrateCoefficient > 0.8) {
+    currentWinrateTag = tags.PRO;
+  } else if (winrateCoefficient <= 0.8 && winrateCoefficient >= 0.5) {
+    currentWinrateTag = tags.AMATEUR;
+  } else {
+    currentWinrateTag = tags.BEGINNER;
+  }
+  //STEPS ANAL
+  if (stepMain === 0) {
+    currentStepTag = tags.FIRST;
+  } else if (stepMain > 0 && stepMain <= 10) {
+    currentStepTag = tags.BEGIN;
+  } else if (stepMain > 10 && stepMain <= 20) {
+    currentStepTag = tags.MIDDLE;
+  } else {
+    currentStepTag = tags.END;
+  }
+  //STEPS QUARTER TODO: REPLACE
+  currentQuarterTags.push(tags.FIRST_QUARTER);
+  currentQuarterTags.push(tags.FORTH_QUARTER);
+
+  let winrateList = [];
+  for (let i = 0; i < hints.length; i++) {
+    for (let j = 0; j < hints[i].winrateTags.length; ++j) {
+      if (hints[i].winrateTags[j] === currentWinrateTag) {
+        winrateList.push(hints[i]);
+      }
+    }
+  }
+    for (let i = 0; i < winrateList.length; ++i) {
+      for (let j = 0; j < winrateList[i].stepTags.length; j++){
+        if (winrateList[i].stepTags[j] === currentStepTag){
+          hints_for_choice.push(winrateList[i]);
+        }
+      }
+    }
+
+
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const [curItem, setCurItem] = useState();
@@ -252,7 +297,7 @@ const Help = ({
                         if (item.id > 4) {
                           scores && handleHelp(item["handleHelp"]);
                         } else {
-                            showModal();
+                          showModal();
                         }
                         if (
                           hintCounter.lastHintStep + 1 === stepMain ||

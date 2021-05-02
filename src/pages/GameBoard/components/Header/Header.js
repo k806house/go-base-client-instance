@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Logo from "../../../../assets/img/logo_game.png";
 import {MAIN_URL} from '../../../../constants/routes'
+import {message} from "antd";
 
 const Wrapper = styled.div`
   display: flex;
@@ -156,7 +157,7 @@ const Bulb = styled.p`
 let timesCal = null;
 let hintDelay = 2;
 
-export const Header = ({ history, gameId, setHint, hint, setResign, helpType, setPass, viewPass, view, times, hintCounter, setHintCounter}) => {
+export const Header = ({ history, gameId, setHint, hint, setResign, helpType, setPass, viewPass, view, times, hintCounter, setHintCounter, stepMain}) => {
   const [timer, setTimer] = useState(hintDelay);
 
   useEffect(async () => {
@@ -164,6 +165,7 @@ export const Header = ({ history, gameId, setHint, hint, setResign, helpType, se
     setTimer(hintDelay);
     timesDelay(hintDelay, true);
   }, [times]);
+
 
 
   const timesDelay = (t, start) => {
@@ -195,7 +197,19 @@ export const Header = ({ history, gameId, setHint, hint, setResign, helpType, se
             <GameId>ID игры: {gameId}</GameId>
           </Menu>
         </Left>
-        {view && timer===0 && (<Bulb onClick={() => {setHint(!hint)}} hint={hint}>
+        {view && timer===0 && (<Bulb onClick={() =>
+        {   setHint(!hint);
+          if(stepMain<10 && !hint){
+            message.warning({
+              content: `Всего лишь ${stepMain} ход! Не стоит ли повременить?`,
+              className: 'custom-class',
+              style: {
+                marginTop: '2vh',
+                fontSize: '20px',
+              },
+            }, 10);
+          }
+        }} hint={hint}>
           <input type="checkbox"/>
           <div></div>
         </Bulb>)}
@@ -203,3 +217,5 @@ export const Header = ({ history, gameId, setHint, hint, setResign, helpType, se
     </Wrapper>
   );
 };
+
+// `Всего лишь ${stepMain} ход! Не стоит ли повременить?`

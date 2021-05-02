@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Modal, Button } from 'antd';
+import { take } from "redux-saga/effects";
 import Board from "./components/Board/Board";
 import GameInfo from "./components/GameInfo/GameInfo";
 import styled from "styled-components";
@@ -33,7 +35,7 @@ import {
   HEATMAP_ZONE_QUARTER,
 } from "./components/Help/types";
 
-import {notification} from "antd";
+import {message, notification} from "antd";
 import {SmileOutlined} from '@ant-design/icons';
 import "antd/dist/antd.css";
 import { proverbs } from "./proverbs"
@@ -87,7 +89,17 @@ const GameBoard = ({ history }) => {
   const dispatch = useDispatch();
   const [times, setTimes] = useState({playerOne: 0, playerTwo: 0});
   const [hintCounter, setHintCounter] = useState({counter: 0, lastHintStep: -1});
+  const [guess, setGuess] = useState("");
   const [proverb, setProverb] = useState('');
+  const markers = useSelector((state) => state.board.markers);
+  const [isKrasavchikVisible, setKrasavchikVisible] = useState(false);
+
+  console.log(guess);
+  console.log(markers);
+  if (guess in markers) {
+      setKrasavchikVisible(true);
+      setGuess("");
+  }
 
   const openNotification = () => {
     notification.open({
@@ -232,6 +244,8 @@ const GameBoard = ({ history }) => {
     client.send(JSON.stringify([7, "go/game", {command: "resign", token: token, game_id: game_id}]));
   }
 
+
+
   const handleHelp = ({type, multipleHandleCount, id, count} ) => {
     dispatch(markersClear());
     setMultipleHint({});
@@ -335,12 +349,19 @@ const GameBoard = ({ history }) => {
   }
   return (
     <Wrapper>
+
+      <Modal title="Так держать!" visible={isKrasavchikVisible}
+      onOk={() => setKrasavchikVisible(false)}
+      onCancel={() => setKrasavchikVisible(false)}>
+            <p>Красавчик!</p>
+      </Modal>
+
       <Header
         hint={hint}
         setPass={pass}
         viewPass={Object.keys(coordinates).length > 0}
         history={history}
-        setHint={(e) => setHint(e)}
+        setHint={(e) => { setHint(e); }}
         setResign={resign}
         helpType={helpType}
         gameId={game_id}
@@ -350,6 +371,7 @@ const GameBoard = ({ history }) => {
         times={times}
         hintCounter={hintCounter}
         setHintCounter = {setHintCounter}
+        stepMain={stepMain}
       />
       <Flex>
         {blocked && (
@@ -408,6 +430,8 @@ const GameBoard = ({ history }) => {
             scores={stepColor !== yourColor ? false : true}
             hintCounter={hintCounter}
             setHintCounter = {setHintCounter}
+            hint = {hint}
+            setGuess = {setGuess}
           />
         )}
       </Flex>

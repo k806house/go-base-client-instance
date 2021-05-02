@@ -94,8 +94,6 @@ const GameBoard = ({ history }) => {
   const markers = useSelector((state) => state.board.markers);
   const [isKrasavchikVisible, setKrasavchikVisible] = useState(false);
 
-  console.log(guess);
-  console.log(markers);
   if (guess in markers) {
       setKrasavchikVisible(true);
       setGuess("");

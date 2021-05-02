@@ -1,5 +1,5 @@
 import { React, useState } from "react";
-import { Modal, Button } from 'antd';
+import { Modal, Button, Tabs } from 'antd';
 import styled from "styled-components";
 import Players from "../GameInfo/components/Players/Players";
 import {
@@ -8,15 +8,27 @@ import {
     hints
 } from "./types";
 
+const { TabPane } = Tabs;
+
 
 const Wrapper = styled.div`
   width: 46%;
   margin-left: 25px;
 `;
 
+const TabsWrapper = styled.div`
+padding: 10px;
+padding-left: 15px;
+padding-right: 15px;
+.ant-tabs-nav{
+    margin: 0;
+}
+
+`;
+
 const HelpWrapper = styled.div`
-  margin-top: 23px;
-  max-height: 508px;
+  // margin-top: 15px ;
+  max-height: 500px;
   overflow: scroll;
   overflow-x: hidden;
   display: flex;
@@ -44,7 +56,7 @@ const HelpItem = styled.div`
     align-items: center;
     justify-content: center;
     top: -15px;
-    right: 250px;
+    right: 234px;
     transition: all .3s;
   }
 
@@ -115,42 +127,88 @@ const Help = ({
                 stepTwo={stepTwo}
                 times={times}
             />
-            <HelpWrapper>
-                {hints_for_choice.map((item) => {
-                    let hintBadgeColor = '2px solid orange';
-                    if (item['fine'] === 2) {
-                        hintBadgeColor = '2px solid orange';
-                    } else if (item['fine'] === 3) {
-                        hintBadgeColor = '2px solid red';
-                    } else if (item['fine'] === 1) {
-                        hintBadgeColor = '2px solid green';
-                    }
+            <TabsWrapper>
+                {/*<Tabs type="card" centered>*/}
+                    <Tabs centered>
+                    <TabPane tab="Умные подсказки" key="1">
+                        <HelpWrapper>
+                            {hints_for_choice.map((item) => {
+                                let hintBadgeColor = '2px solid orange';
+                                if (item['fine'] === 2) {
+                                    hintBadgeColor = '2px solid orange';
+                                } else if (item['fine'] === 3) {
+                                    hintBadgeColor = '2px solid red';
+                                } else if (item['fine'] === 1) {
+                                    hintBadgeColor = '2px solid green';
+                                }
 
-                    return <HelpItem
-                        active={activeHelpId === item['id']}
-                        onClick={() => {
-                            // scores && handleHelp(item['handleHelp']);
-                            if (hintCounter.lastHintStep + 1 === stepMain || hintCounter.lastHintStep === stepMain || stepMain === 0) {
-                                setHintCounter({ counter: hintCounter.counter + 1, lastHintStep: stepMain });
-                            } else {
-                                ;
-                                setHintCounter({ counter: 0, lastHintStep: -1 });
-                            }
-                        }
-                        }
-                    >
-                        <div className="button" /*onClick={() => showModal()}*/ style={{ border: hintBadgeColor }}>
-                            <span className="content">{item['name']}</span>
-                            <span className="badge" style={{ border: hintBadgeColor }}>{item['fine']}</span>
-                        </div>
-                        <Modal title="Basic Modal" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
-                            <p>Some contents...</p>
-                            <p>Some contents...</p>
-                            <p>Some contents...</p>
-                        </Modal>
-                    </HelpItem>
-                })}
-            </HelpWrapper>
+                                return <HelpItem
+                                    active={activeHelpId === item['id']}
+                                    onClick={() => {
+                                        scores && handleHelp(item['handleHelp']);
+                                        if (hintCounter.lastHintStep + 1 === stepMain || hintCounter.lastHintStep === stepMain || stepMain === 0) {
+                                            setHintCounter({ counter: hintCounter.counter + 1, lastHintStep: stepMain });
+                                        } else {
+                                            ;
+                                            setHintCounter({ counter: 0, lastHintStep: -1 });
+                                        }
+                                    }
+                                    }
+                                >
+                                    <div className="button" /*onClick={() => showModal()}*/ style={{ border: hintBadgeColor }}>
+                                        <span className="content">{item['name']}</span>
+                                        <span className="badge" style={{ border: hintBadgeColor }}>{item['fine']}</span>
+                                    </div>
+                                    <Modal title="Basic Modal" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+                                        <p>Some contents...</p>
+                                        <p>Some contents...</p>
+                                        <p>Some contents...</p>
+                                    </Modal>
+                                </HelpItem>
+                            })}
+                        </HelpWrapper>
+                    </TabPane>
+                    <TabPane tab="Все подсказки" key="2">
+                        <HelpWrapper>
+                            {hints.map((item) => {
+                                let hintBadgeColor = '2px solid orange';
+                                if (item['fine'] === 2) {
+                                    hintBadgeColor = '2px solid orange';
+                                } else if (item['fine'] === 3) {
+                                    hintBadgeColor = '2px solid red';
+                                } else if (item['fine'] === 1) {
+                                    hintBadgeColor = '2px solid green';
+                                }
+
+                                return <HelpItem
+                                    active={activeHelpId === item['id']}
+                                    onClick={() => {
+                                        scores && handleHelp(item['handleHelp']);
+                                        if (hintCounter.lastHintStep + 1 === stepMain || hintCounter.lastHintStep === stepMain || stepMain === 0) {
+                                            setHintCounter({ counter: hintCounter.counter + 1, lastHintStep: stepMain });
+                                        } else {
+                                            ;
+                                            setHintCounter({ counter: 0, lastHintStep: -1 });
+                                        }
+                                    }
+                                    }
+                                >
+                                    <div className="button" /*onClick={() => showModal()}*/ style={{ border: hintBadgeColor }}>
+                                        <span className="content">{item['name']}</span>
+                                        <span className="badge" style={{ border: hintBadgeColor }}>{item['fine']}</span>
+                                    </div>
+                                    <Modal title="Basic Modal" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+                                        <p>Some contents...</p>
+                                        <p>Some contents...</p>
+                                        <p>Some contents...</p>
+                                    </Modal>
+                                </HelpItem>
+                            })}
+                        </HelpWrapper>
+                    </TabPane>
+                </Tabs>
+            </TabsWrapper>
+
         </Wrapper>
     );
 };

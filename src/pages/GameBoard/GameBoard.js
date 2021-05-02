@@ -86,7 +86,7 @@ const processHeatmapQuarters = (field) => {
 
   console.log(sortedQs[0].q);
 
-  if (sortedQs[1] > sortedQs[0]/2) {
+  if (sortedQs[1].sum > sortedQs[0].sum / 2) {
     return [sortedQs[0], sortedQs[1]];
   } else {
     return [sortedQs[0]];

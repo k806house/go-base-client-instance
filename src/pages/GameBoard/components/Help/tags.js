@@ -1,9 +1,9 @@
 export default  {
   // Теги для Heatmap
-  "FIRST_QUARTER": "FIRST_QUARTER",
-  "SECOND_QUARTER": "SECOND_QUARTER",
-  "THIRD_QUARTER": "THIRD_QUARTER",
-  "FORTH_QUARTER": "FORTH_QUARTER",
+  "FIRST_QUARTER": 1,
+  "SECOND_QUARTER": 2,
+  "THIRD_QUARTER": 3,
+  "FORTH_QUARTER": 4,
   // Стадия игры
   "BEGIN": "BEGIN",
   "MIDDLE": "MIDDLE",

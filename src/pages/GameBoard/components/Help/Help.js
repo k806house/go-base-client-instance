@@ -95,7 +95,7 @@ const Help = ({
   hintCounter,
   setHintCounter,
   hint,
-  setGuess,
+  setGuess, crowdedQuarters,
 }) => {
   let currentQuarterTags = [];
   let hints_for_choice = [];
@@ -122,8 +122,25 @@ const Help = ({
     currentStepTag = tags.END;
   }
   //STEPS QUARTER TODO: REPLACE
-  currentQuarterTags.push(tags.FIRST_QUARTER);
-  currentQuarterTags.push(tags.FORTH_QUARTER);
+  if (crowdedQuarters === undefined) crowdedQuarters = [];
+  for (let i=0;i<crowdedQuarters.length;i++){
+    if (crowdedQuarters[i].q === 1){
+      currentQuarterTags.push(tags.FIRST_QUARTER)
+    }
+    if (crowdedQuarters[i].q === 2){
+      currentQuarterTags.push(tags.SECOND_QUARTER)
+    }
+    if (crowdedQuarters[i].q === 3){
+      currentQuarterTags.push(tags.THIRD_QUARTER)
+    }
+    if (crowdedQuarters[i].q === 4){
+      currentQuarterTags.push(tags.FORTH_QUARTER)
+    }
+  }
+
+  console.log("currentQuarterTags");
+  console.log(currentQuarterTags);
+  console.log(crowdedQuarters);
 
   let winrateList = [];
   for (let i = 0; i < hints.length; i++) {
@@ -138,6 +155,38 @@ const Help = ({
         if (winrateList[i].stepTags[j] === currentStepTag){
           hints_for_choice.push(winrateList[i]);
         }
+      }
+    }
+
+    currentQuarterTags = currentQuarterTags.sort();
+
+    if (currentQuarterTags.length === 1){
+      if (currentQuarterTags[0]===tags.FIRST_QUARTER){
+        hints_for_choice.push(hints[12])
+      }
+      if (currentQuarterTags[0]===tags.SECOND_QUARTER){
+        hints_for_choice.push(hints[13])
+      }
+      if (currentQuarterTags[0]===tags.THIRD_QUARTER){
+        hints_for_choice.push(hints[14])
+      }
+      if (currentQuarterTags[0]===tags.FORTH_QUARTER){
+        hints_for_choice.push(hints[15])
+      }
+    } else if (currentQuarterTags.length === 2){
+      if (currentQuarterTags[0] === tags.FIRST_QUARTER){
+        if (currentQuarterTags[1] === tags.SECOND_QUARTER){
+          hints_for_choice.push(hints[16])
+        }
+        if (currentQuarterTags[1] === tags.FORTH_QUARTER){
+          hints_for_choice.push(hints[18])
+        }
+      }
+      if (currentQuarterTags[0] === tags.SECOND_QUARTER&& currentQuarterTags[1] === tags.THIRD_QUARTER){
+        hints_for_choice.push(hints[19])
+      }
+      if (currentQuarterTags[0] === tags.THIRD_QUARTER&& currentQuarterTags[1] === tags.FORTH_QUARTER){
+        hints_for_choice.push(hints[17])
       }
     }
 

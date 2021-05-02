@@ -31,7 +31,7 @@ import {
   HEATMAP_ZONE_QUARTER,
 } from "./components/Help/types";
 
-import {notification} from "antd";
+import {message, notification} from "antd";
 import {SmileOutlined} from '@ant-design/icons';
 import "antd/dist/antd.css";
 import { proverbs } from "./proverbs"
@@ -358,6 +358,7 @@ const GameBoard = ({ history }) => {
         times={times}
         hintCounter={hintCounter}
         setHintCounter = {setHintCounter}
+        stepMain={stepMain}
       />
       <Flex>
         {blocked && (

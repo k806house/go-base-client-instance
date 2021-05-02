@@ -9,3 +9,6 @@ export const GET_FULL_LOG = "GET_FULL_LOG";
 
 export const SET_LIDERS = "SET_LIDERS";
 export const GET_LIDERS = "GET_LIDERS";
+
+export const GAME_INFO = "GAME_INFO";
+export const GET_GAME_INFO = "GET_GAME_INFO";

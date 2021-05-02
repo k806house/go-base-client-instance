@@ -1,7 +1,18 @@
 import { all, takeLatest, call, put } from "redux-saga/effects";
-import { getProfile, getProfileById, getLiders, getSgf, getFullLog } from "../../api/profile";
+import {getProfile, getProfileById, getLiders, getSgf, getFullLog, getGameInfo} from "../../api/profile";
 import { getToken } from "../../helpers/session";
-import { GET_PROFILE, PROFILE_INFO, GET_PROFILE_BY_ID, GET_SGF, GET_FULL_LOG, PROFILE_BY_ID_INFO, SET_LIDERS, GET_LIDERS } from "./types";
+import {
+  GET_PROFILE,
+  PROFILE_INFO,
+  GET_PROFILE_BY_ID,
+  GET_SGF,
+  GET_FULL_LOG,
+  PROFILE_BY_ID_INFO,
+  SET_LIDERS,
+  GET_LIDERS,
+  GET_GAME_INFO,
+  GAME_INFO
+} from "./types";
 
 function* fetchGetProfile_saga() {
   try {
@@ -51,6 +62,20 @@ function* fetchGetLidersBoard_saga() {
   }
 }
 
+function* fetchGameInfo_saga(action) {
+  const { payload } = action;
+
+  try {
+    const res = yield call(getGameInfo, getToken(), payload.game_id);
+    yield put({
+      type: GAME_INFO,
+      payload: res
+    });
+  } catch (e) {
+    // throw e;
+  }
+}
+
 export function* profileSaga() {
   yield all([
     takeLatest(GET_PROFILE, fetchGetProfile_saga),
@@ -58,5 +83,6 @@ export function* profileSaga() {
     takeLatest(GET_FULL_LOG, fetchGetFullLog_saga),
     takeLatest(GET_LIDERS, fetchGetLidersBoard_saga),
     takeLatest(GET_PROFILE_BY_ID, fetchGetProfileById_saga),
+    takeLatest(GET_GAME_INFO, fetchGameInfo_saga),
   ]);
 }

@@ -206,30 +206,16 @@ const Help = ({
                 return (
                   <HelpItem
                     active={activeHelpId === item["id"]}
-                    onClick={() => {
-                      scores && handleHelp(item["handleHelp"]);
-                      if (
-                        hintCounter.lastHintStep + 1 === stepMain ||
-                        hintCounter.lastHintStep === stepMain ||
-                        stepMain === 0
-                      ) {
-                        setHintCounter({
-                          counter: hintCounter.counter + 1,
-                          lastHintStep: stepMain,
-                        });
-                      } else {
-                        setHintCounter({ counter: 0, lastHintStep: -1 });
-                      }
-                    }}
                   >
                     <div
                       className="button"
                       style={{ border: hintBadgeColor }}
                       onClick={() => {
-                        showModal();
                         setCurItem(item);
                         if (item.id > 4) {
                           scores && handleHelp(item["handleHelp"]);
+                        } else {
+                            showModal();
                         }
                         if (
                           hintCounter.lastHintStep + 1 === stepMain ||
@@ -273,21 +259,6 @@ const Help = ({
                 return (
                   <HelpItem
                     active={activeHelpId === item["id"]}
-                    onClick={() => {
-                      scores && handleHelp(item["handleHelp"]);
-                      if (
-                        hintCounter.lastHintStep + 1 === stepMain ||
-                        hintCounter.lastHintStep === stepMain ||
-                        stepMain === 0
-                      ) {
-                        setHintCounter({
-                          counter: hintCounter.counter + 1,
-                          lastHintStep: stepMain,
-                        });
-                      } else {
-                        setHintCounter({ counter: 0, lastHintStep: -1 });
-                      }
-                    }}
                   >
                     <div
                       className="button"

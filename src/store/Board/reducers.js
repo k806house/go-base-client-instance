@@ -73,6 +73,7 @@ export const boardReducer = (state = initialState, action) => {
         } = action.payload.isQuarter ? MAP_QUARTERS[action.payload.zone] : MAP_HALF[action.payload.zone];
         console.log(action.payload.zone);
       } else if (action.payload.quarter) {
+        console.log(action.payload.quarter);
         var mapStones = {};
         var classNamesMapStones = {};
         let alpha = 'ABCDEFGHJKLMNOPQRSTUV'

@@ -1,4 +1,4 @@
-import { PROFILE_INFO, PROFILE_BY_ID_INFO, SET_LIDERS } from "./types";
+import {PROFILE_INFO, PROFILE_BY_ID_INFO, SET_LIDERS, GAME_INFO} from "./types";
 
 const initialState = {
   userProfile: {},
@@ -23,6 +23,13 @@ export const profileReducer = (state = initialState, action) => {
         ...state,
         liders: action.payload.leaderboard,
       };
+    case GAME_INFO:
+      let fieldObj = JSON.parse(action.payload.log);
+
+      return {
+        ...state,
+        field: fieldObj[fieldObj.length - 1],
+      }
     default:
       return { ...state };
   }

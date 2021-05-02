@@ -1,4 +1,4 @@
-import { GET_PROFILE, GET_PROFILE_BY_ID, SET_LIDERS, GET_SGF, GET_FULL_LOG, GET_LIDERS } from "./types";
+import {GET_PROFILE, GET_PROFILE_BY_ID, SET_LIDERS, GET_SGF, GET_FULL_LOG, GET_LIDERS, GET_GAME_INFO} from "./types";
 
 export const getProfile = () => ({
   type: GET_PROFILE,
@@ -21,4 +21,9 @@ export const getFullLog = (id) => ({
 
 export const getLiders = () => ({
   type: GET_LIDERS
+});
+
+export const getGameInfo = (game_id) => ({
+  type: GET_GAME_INFO,
+  payload: { game_id }
 });

@@ -19,3 +19,7 @@ export const getFullLog = (id) => {
 export const getLiders = (token) => {
   return GET(`leaderboard?token=${token}`, {}, token);
 };
+
+export const getGameInfo = (token, id) => {
+  return GET(`game/info/${id}?token=${token}`, {}, token);
+}

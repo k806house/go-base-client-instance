@@ -21,6 +21,10 @@ import {
   hintScoresSuperiority
 } from "../../store/Board/actions";
 
+import {
+  getGameInfo
+} from "../../store/Profile/actions";
+
 import { clearGameId } from "../../store/GameCreate/actions";
 
 import { client, token } from '../../Socket.js'
@@ -60,6 +64,7 @@ const GameBoard = ({ history }) => {
   const game_id = useSelector((state) => state.createGame.id);
   const blocked = useSelector((state) => state.board.blocked);
   const mapStones = useSelector((state) => state.board.mapStones);
+  const field = useSelector((state) => state.profile.field);
 
   const [hint, setHint] = useState(false);
   const [enemyPass, setEnemyPass] = useState(false);
@@ -120,6 +125,14 @@ const GameBoard = ({ history }) => {
       setHintCounter({counter: 0, lastHintStep: -1});
     }
   }, [hintCounter]);
+
+  // Эффект для просчета heatmapов поля после хода соперника
+  useEffect(() => {
+
+    dispatch(getGameInfo(game_id));
+    console.log(field);
+
+  }, [ stepTwo ]);
 
   client.onmessage = function(e) {
     setEnemyPass(false)

@@ -1,3 +1,5 @@
+import tags from './tags';
+
 export const HEATMAP_FULL = 13;
 export const HEATMAP_ZONE_QUARTER = 23
 export const HEATMAP_ZONE_HALF = 24
@@ -111,49 +113,57 @@ export const hints = [
     'id': 25,
     'handleHelp':{ type: "map", id: 25 },
     'name': 'Тепловая карта 1-й черверти доски',
-    'fine': 1
+    'fine': 1,
+    'tags': [ tags.FIRST_QUARTER ]
   },
   {
     'id': 26,
     'handleHelp':{ type: "map", id: 26 },
     'name': 'Тепловая карта 2-й черверти доски',
-    'fine': 1
+    'fine': 1,
+    'tags': [ tags.SECOND_QUARTER ]
   },
   {
     'id': 27,
     'handleHelp':{ type: "map", id: 27 },
     'name': 'Тепловая карта 3-й черверти доски',
-    'fine': 1
+    'fine': 1,
+    'tags': [ tags.THIRD_QUARTER ]
   },
   {
     'id': 28,
     'handleHelp':{ type: "map", id: 28 },
     'name': 'Тепловая карта 4-й черверти доски',
-    'fine': 1
+    'fine': 1,
+    'tags': [ tags.FORTH_QUARTER ]
   },
   {
     'id': 29,
     'handleHelp':{ type: "map", id: 29 },
     'name': 'Тепловая карта 1-й и 2-й червертей доски',
-    'fine': 1
+    'fine': 1,
+    'tags': [ tags.FIRST_QUARTER, tags.SECOND_QUARTER ]
   },
   {
     'id': 30,
     'handleHelp':{ type: "map", id: 30 },
     'name': 'Тепловая карта 3-й и 4-й червертей доски',
-    'fine': 1
+    'fine': 1,
+    'tags': [ tags.THIRD_QUARTER, tags.FORTH_QUARTER ]
   },
   {
     'id': 31,
     'handleHelp':{ type: "map", id: 31 },
     'name': 'Тепловая карта 1-й и 4-й червертей доски',
-    'fine': 1
+    'fine': 1,
+    'tags': [ tags.FIRST_QUARTER, tags.FORTH_QUARTER ]
   },
   {
     'id': 32,
     'handleHelp':{ type: "map", id: 32 },
     'name': 'Тепловая карта 2-й и 3-й червертей доски',
-    'fine': 1
+    'fine': 1,
+    'tags': [ tags.SECOND_QUARTER, tags.THIRD_QUARTER ]
   },
   {
     'id': 33,

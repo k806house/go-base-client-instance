@@ -68,7 +68,7 @@ const Info = ({history}) => {
           <p style={{marginBottom: 15}}></p>
           <h4 style={{marginBottom: 10}}>4. Ссылка с подписью на документацию Swagger и объяснение, что там можно
             проверить запросы</h4>
-          <a href="https://go-backend-denis.ambersoft.llc/api/doc">https://go-backend-denis.ambersoft.llc/api/doc</a>
+          <a href="server.mindgamehack.ru/api/doc">server.mindgamehack.ru/api/doc</a>
           <p style={{marginBottom: 15}}></p>
           Удобная Swagger-документация к API. Там вы сможете не только познакомиться со всеми доступными методами, но и
           протестировать их. Для этого раскройте нужную вам вкладку с описанием и в правом верхнем углу нажмите “Try it
@@ -182,7 +182,7 @@ const Info = ({history}) => {
           payload: {
           msg: "Dock has joined" // сообщение от сервера
           player: {
-          avatar: "https://go-backend-denis.ambersoft.llc/uploads/608870de90735.png"
+          avatar: "server.mindgamehack.ru/uploads/608870de90735.png"
           nickname: "Dock"
           position: 123 // в рейтинге участников
           pts: -6.5 // итоговый рейтинг по очкам
@@ -200,7 +200,7 @@ const Info = ({history}) => {
           payload: {
           currentMap: [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],…] // текущее состояние поля
           opponent: { // данные опонента
-          avatar: "https://go-backend-denis.ambersoft.llc/uploads/608870de90735.png"
+          avatar: "server.mindgamehack.ru/uploads/608870de90735.png"
           nickname: "Dock"
           position: 130
           pts: -109
@@ -212,7 +212,7 @@ const Info = ({history}) => {
           turnWhiteEndedAt: 1619727099000 // время окончания хода белых в миллисекундах
           type: "currentMap" // тип сообщения
           you: {
-          avatar: "https://go-backend-denis.ambersoft.llc/uploads/608870de90735.png"
+          avatar: "server.mindgamehack.ru/uploads/608870de90735.png"
           nickname: "Dock"
           position: 123
           pts: -6.5
@@ -241,7 +241,7 @@ const Info = ({history}) => {
           payload: {
           finalScore: 7 //итоговый счет
           loserPlayer: {
-          avatar: "https://go-backend-denis.ambersoft.llc/uploads/608870de90735.png"
+          avatar: "server.mindgamehack.ru/uploads/608870de90735.png"
           finalScore: -7 //счет проигравшего
           hintScore: 0 //потраченные на подсказки очки
           id: 82
@@ -254,7 +254,7 @@ const Info = ({history}) => {
           type: "endGame"
           winner: "b"
           winnerPlayer: {
-          avatar: "https://go-backend-denis.ambersoft.llc/uploads/608870de90735.png"
+          avatar: "server.mindgamehack.ru/uploads/608870de90735.png"
           finalScore: 10
           hintScore: 3
           id: 77
@@ -320,7 +320,7 @@ const Info = ({history}) => {
             базовые методы. </h4>
           Победитель партии определяется по формуле:
           <p></p>
-          <img src="https://go-backend-denis.ambersoft.llc/uploads/summ.png" alt={"sum"}/>
+          <img src="server.mindgamehack.ru/uploads/summ.png" alt={"sum"}/>
           <ol>
               <li>RP – Итоговые очки за партию</li>
               <li>S – Дельта площадей со знаком (по правилам)</li>

@@ -36,7 +36,7 @@ export const MAP_HALF = {
   '2': getZone('ABCDEFGGHJKLMN', '1,2,3,4,5,6,7'),
 }
 
-export const hints = [
+export const HINTS = [
   {
     'id': 1,
     'handleHelp':{ type: "single", id: 1, count: 1 },

@@ -2,7 +2,7 @@ import { React, useState } from "react";
 import { Modal, Button, Tabs } from "antd";
 import styled from "styled-components";
 import Players from "../GameInfo/components/Players/Players";
-import { HEATMAP_FULL, HEATMAP_ZONE_QUARTER, hints } from "./types";
+import { HEATMAP_FULL, HEATMAP_ZONE_QUARTER, HINTS } from "./types";
 import tags from "./tags";
 
 const { TabPane } = Tabs;
@@ -103,7 +103,7 @@ const Help = ({
   let currentWinrateTag;
   let winrate = you.winrate.split("/");
   let winrateCoefficient = +winrate[0] / +winrate[1];
-  //WINRATE ANAL
+  //WINRATE ANAL https://github.com/infusion/BitSet.js
   if (winrateCoefficient > 0.8) {
     currentWinrateTag = tags.PRO;
   } else if (winrateCoefficient <= 0.8 && winrateCoefficient >= 0.5) {
@@ -138,15 +138,11 @@ const Help = ({
     }
   }
 
-  console.log("currentQuarterTags");
-  console.log(currentQuarterTags);
-  console.log(crowdedQuarters);
-
   let winrateList = [];
-  for (let i = 0; i < hints.length; i++) {
-    for (let j = 0; j < hints[i].winrateTags.length; ++j) {
-      if (hints[i].winrateTags[j] === currentWinrateTag) {
-        winrateList.push(hints[i]);
+  for (let i = 0; i < HINTS.length; i++) {
+    for (let j = 0; j < HINTS[i].winrateTags.length; ++j) {
+      if (HINTS[i].winrateTags[j] === currentWinrateTag) {
+        winrateList.push(HINTS[i]);
       }
     }
   }
@@ -159,44 +155,39 @@ const Help = ({
     }
 
     currentQuarterTags = currentQuarterTags.sort();
-    console.log("currentQuarterTags sorted");
-    console.log(currentQuarterTags);
 
     if (currentQuarterTags.length === 1){
       if (currentQuarterTags[0]===tags.FIRST_QUARTER){
-        hints_for_choice.push(hints[12])
+        hints_for_choice.push(HINTS[12])
       }
       if (currentQuarterTags[0]===tags.SECOND_QUARTER){
-        console.log("2f");
-        hints_for_choice.push(hints[13])
+        hints_for_choice.push(HINTS[13])
       }
       if (currentQuarterTags[0]===tags.THIRD_QUARTER){
-        console.log(hints[14]);
-        hints_for_choice.push(hints[14])
+        hints_for_choice.push(HINTS[14])
       }
       if (currentQuarterTags[0]===tags.FORTH_QUARTER){
-        console.log("4f");
-        hints_for_choice.push(hints[15])
+        hints_for_choice.push(HINTS[15])
       }
     } else if (currentQuarterTags.length === 2){
       if (currentQuarterTags[0] === tags.FIRST_QUARTER){
         if (currentQuarterTags[1] === tags.SECOND_QUARTER){
-          hints_for_choice.push(hints[16])
+          hints_for_choice.push(HINTS[16])
         }
         if (currentQuarterTags[1] === tags.FORTH_QUARTER){
-          hints_for_choice.push(hints[18])
+          hints_for_choice.push(HINTS[18])
         }
       }
       if (currentQuarterTags[0] === tags.SECOND_QUARTER&& currentQuarterTags[1] === tags.THIRD_QUARTER){
-        hints_for_choice.push(hints[19])
+        hints_for_choice.push(HINTS[19])
       }
       if (currentQuarterTags[0] === tags.THIRD_QUARTER&& currentQuarterTags[1] === tags.FORTH_QUARTER){
-        hints_for_choice.push(hints[17])
+        hints_for_choice.push(HINTS[17])
       }
     }
 
     hints_for_choice = hints_for_choice.sort( (a, b) => a.fine - b.fine);
-    var sortedHints = hints.slice();
+    var sortedHints = HINTS.slice();
     sortedHints = sortedHints.sort((a, b) => a.fine - b.fine);
 
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -269,11 +260,11 @@ const Help = ({
                       style={{ border: hintBadgeColor }}
                       onClick={() => {
                         setCurItem(item);
-                        if (item.id > 4) {
+                        //if (item.id > 4) {
                           scores && handleHelp(item["handleHelp"]);
-                        } else {
-                            showModal();
-                        }
+                        //} else {
+                            //showModal();
+                        //}
                         if (
                           hintCounter.lastHintStep + 1 === stepMain ||
                           hintCounter.lastHintStep === stepMain ||
@@ -322,11 +313,11 @@ const Help = ({
                       style={{ border: hintBadgeColor }}
                       onClick={() => {
                         setCurItem(item);
-                        if (item.id > 4) {
+                        //if (item.id > 4) {
                           scores && handleHelp(item["handleHelp"]);
-                        } else {
-                          showModal();
-                        }
+                        //} else {
+                        //  showModal();
+                        //}
                         if (
                           hintCounter.lastHintStep + 1 === stepMain ||
                           hintCounter.lastHintStep === stepMain ||

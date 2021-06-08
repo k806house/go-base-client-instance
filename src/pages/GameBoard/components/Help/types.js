@@ -217,15 +217,15 @@ export const HINTS = [
     'winrateTags': [],
     'quarterTags': [tags.SECOND_QUARTER, tags.THIRD_QUARTER]
   },
-  {
-    'id': 33,
-    'handleHelp':{ type: "score", id: 33 },
-    'name': 'Какой перевес в очках на данный момент?',
-    'fine': 1,
-    'stepTags': [tags.END],
-    'winrateTags': [tags.BEGINNER, tags.AMATEUR, tags.PRO],
-    'quarterTags': []
-  },
+  // {
+  //   'id': 33,
+  //   'handleHelp':{ type: "score", id: 33 },
+  //   'name': 'Какой перевес в очках на данный момент?',
+  //   'fine': 1,
+  //   'stepTags': [tags.END],
+  //   'winrateTags': [tags.BEGINNER, tags.AMATEUR, tags.PRO],
+  //   'quarterTags': []
+  // },
   {
     'id': 34,
     'handleHelp':{ type: "score", id: 34 },
